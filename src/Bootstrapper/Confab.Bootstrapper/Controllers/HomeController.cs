@@ -6,6 +6,7 @@ namespace Confab.Bootstrapper.Controllers
     [ApiController]
     public class HomeController : ControllerBase
     {
+        [HttpGet]
         public ActionResult Get()
         {
             return Ok("Confab API!");
