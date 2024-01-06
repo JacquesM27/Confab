@@ -1,0 +1,6 @@
+@Url = http://localhost:5062
+
+GET {{Url}}/
+Accept: application/json
+
+###
