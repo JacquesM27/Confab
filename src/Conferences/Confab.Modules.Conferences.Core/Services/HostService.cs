@@ -6,7 +6,7 @@ using Confab.Modules.Conferences.Core.Repositories;
 
 namespace Confab.Modules.Conferences.Core.Services;
 
-class HostService(IHostRepository hostRepository, IHostDeletionPolicy hostDeletionPolicy) : IHostService
+internal class HostService(IHostRepository hostRepository, IHostDeletionPolicy hostDeletionPolicy) : IHostService
 {
     public async Task AddAsync(HostDto dto)
     {
