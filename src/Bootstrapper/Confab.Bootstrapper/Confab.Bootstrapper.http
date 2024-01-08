@@ -4,3 +4,9 @@ GET {{Url}}/
 Accept: application/json
 
 ###
+GET {{Url}}/conferences-module
+Accept: application/json
+
+###
+GET {{Url}}/conferences-module-hosts
+Accept: application/json
