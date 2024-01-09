@@ -2,7 +2,7 @@
 
 namespace Confab.Modules.Conferences.Api.Controllers;
 
-[Route(BasePath + "-[controller]")]
+[Route(BasePath + "/[controller]")]
 [ApiController]
 internal abstract class BaseController : ControllerBase
 {

@@ -1,12 +1,4 @@
 @Url = http://localhost:5084
 
-GET {{Url}}/
-Accept: application/json
-
-###
-GET {{Url}}/conferences-module
-Accept: application/json
-
-###
-GET {{Url}}/conferences-module-hosts
+GET {{Url}}
 Accept: application/json
