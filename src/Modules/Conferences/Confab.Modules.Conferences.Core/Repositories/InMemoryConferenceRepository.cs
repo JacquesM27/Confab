@@ -1,0 +1,35 @@
+﻿using Confab.Modules.Conferences.Core.Entities;
+using Confab.Modules.Conferences.Core.Exception;
+
+namespace Confab.Modules.Conferences.Core.Repositories;
+
+internal class InMemoryConferenceRepository : IConferenceRepository
+{
+    private readonly List<Conference> _conferences = [];
+
+    public Task<Conference?> GetAsync(Guid id)
+        => Task.FromResult(_conferences.SingleOrDefault(x => x.Id == id));
+
+    public async Task<IReadOnlyList<Conference>> BrowseAsync()
+    {
+        await Task.CompletedTask;
+        return _conferences;
+    }
+
+    public Task AddAsync(Conference conference)
+    {
+        _conferences.Add(conference);
+        return Task.CompletedTask;
+    }
+
+    public Task UpdateAsync(Conference conference)
+    {
+        return Task.CompletedTask;
+    }
+
+    public Task DeleteAsync(Conference conference)
+    {
+        _conferences.Remove(conference);
+        return Task.CompletedTask;
+    }
+}

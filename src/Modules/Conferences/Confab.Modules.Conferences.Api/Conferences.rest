@@ -1,0 +1,82 @@
+@Url = http://localhost:5084/conferences-module
+@HostId = d149d4ca-7aa4-4887-8370-1868ce3fcba8
+
+GET {{Url}}
+Accept: application/json
+
+###### HOSTS ######
+
+###
+POST {{Url}}/hosts
+Content-Type: application/json
+
+{
+    "name": "Host #1",
+    "description": "Lorem ipsum"
+}
+
+###
+GET {{Url}}/hosts/{{HostId}}
+Content-Type: application/json
+
+###
+GET {{Url}}/hosts
+Content-Type: application/json
+
+###
+PUT {{Url}}/hosts/{{HostId}}
+Content-Type: application/json
+
+{
+    "name": "Host #2",
+    "conferences": [],
+    "description": "Muspi merol"
+}
+
+###
+DELETE {{Url}}/hosts/{{HostId}}
+
+###### CONFERENCES ######
+
+@ConferenceId = 60124a7c-3b85-41fb-9f35-ffdd5c0c0a5a
+###
+POST {{Url}}/conferences
+Content-Type: application/json
+
+{
+    "name": "Conference #1",
+    "hostId": "{{HostId}}",
+    "description": "Lorem ipsum",
+    "logoUrl": "123",
+    "hostName": "Some host",
+    "location": "Warsaw",
+    "from": "2024-01-20",
+    "to": "2024-01-24",
+    "participantLimit": 100
+}
+
+###
+GET {{Url}}/conferences/{{ConferenceId}}
+Content-Type: application/json
+
+###
+GET {{Url}}/conferences
+Content-Type: application/json
+
+###
+PUT {{Url}}/conferences/{{ConferenceId}}
+Content-Type: application/json
+
+{
+    "name": "Conference #2",
+    "description": "Lorem ipsum",
+    "logoUrl": "123",
+    "hostName": "Some host",
+    "location": "Warsaw",
+    "from": "2024-01-09",
+    "to": "2024-01-12",
+    "participantLimit": 100
+}
+
+###
+DELETE {{Url}}/conferences/{{ConferenceId}}
