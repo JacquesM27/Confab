@@ -1,5 +1,5 @@
 @Url = http://localhost:5084/conferences-module
-@HostId = d149d4ca-7aa4-4887-8370-1868ce3fcba8
+@HostId = 7539b3e8-dc3a-4b53-b42b-a4eb4d2e5727
 
 GET {{Url}}
 Accept: application/json
@@ -38,7 +38,7 @@ DELETE {{Url}}/hosts/{{HostId}}
 
 ###### CONFERENCES ######
 
-@ConferenceId = 60124a7c-3b85-41fb-9f35-ffdd5c0c0a5a
+@ConferenceId = 877cc734-6c15-430c-accc-35ad84904141
 ###
 POST {{Url}}/conferences
 Content-Type: application/json

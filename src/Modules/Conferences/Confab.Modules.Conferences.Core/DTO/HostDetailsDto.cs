@@ -2,5 +2,5 @@
 
 internal class HostDetailsDto : HostDto
 {
-    public List<ConferenceDto> Conferences { get; set; }
+    public List<ConferenceDto> Conferences { get; set; } = [];
 }

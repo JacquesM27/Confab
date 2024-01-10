@@ -52,9 +52,8 @@ internal class ConferenceService(IConferenceRepository conferenceRepository, IHo
 
     public async Task UpdateAsync(ConferenceDetailsDto dto)
     {
-        var conference = await conferenceRepository.GetAsync(dto.Id);
-        if (conference is null)
-            throw new ConferenceNotFoundException(dto.Id);
+        var conference = await conferenceRepository.GetAsync(dto.Id) 
+            ?? throw new ConferenceNotFoundException(dto.Id);
 
         conference.Name = dto.Name;
         conference.Description = dto.Description;
@@ -68,9 +67,8 @@ internal class ConferenceService(IConferenceRepository conferenceRepository, IHo
 
     public async Task DeleteAsync(Guid id)
     {
-        var conference = await conferenceRepository.GetAsync(id);
-        if (conference is null)
-            throw new ConferenceNotFoundException(id);
+        var conference = await conferenceRepository.GetAsync(id) 
+            ?? throw new ConferenceNotFoundException(id);
 
         if (await conferenceDeletionPolicy.CanDeleteAsync(conference) is false)
             throw new CannotDeleteConferenceException(id);

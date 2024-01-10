@@ -9,14 +9,14 @@ internal class ConferenceDto
     
     [Required]
     [StringLength(100, MinimumLength = 3)]
-    public string Name { get; set; }
+    public string Name { get; set; } = string.Empty;
     public string? HostName { get; set; }
-    
+
     [Required]
     [StringLength(100, MinimumLength = 3)]
-    public string Location { get; set; }
-    
-    public string LogoUrl { get; set; }
+    public string Location { get; set; } = string.Empty;
+
+    public string LogoUrl { get; set; } = string.Empty;
     public int? ParticipantsLimit { get; set; }
     
     public DateTime From { get; set; }

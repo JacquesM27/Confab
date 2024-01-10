@@ -28,11 +28,11 @@ internal class HostService(IHostRepository hostRepository, IHostDeletionPolicy h
         
         var dto = Map<HostDetailsDto>(host);
 
-        dto.Conferences = host.Conferences?.Select(x => new ConferenceDto()
+        dto.Conferences = host.Conferences.Select(x => new ConferenceDto()
         {
             Id = x.Id,
             HostId = x.Id,
-            HostName = x.Host.Name,
+            HostName = x.Host?.Name,
             From = x.From,
             To = x.To,
             Name = x.Name,
