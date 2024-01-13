@@ -1,0 +1,33 @@
+@Url = http://localhost:5084/speakers-module
+
+@SpeakerId = 82680bd4-e7a4-4148-ab0d-93fcadef0568
+
+GET {{Url}}
+Accept: application/json
+
+###
+POST {{Url}}/speakers
+Content-Type: application/json
+
+{
+    "bio": "Interesting John bio [...]",
+    "email": "john.doe@confab.io",
+    "fullName": "John Doe"
+}
+
+###
+GET {{Url}}/speakers/{{SpeakerId}}
+
+
+###
+PUT {{Url}}/speakers/{{SpeakerId}}
+Content-Type: application/json
+
+{
+    "bio": "more interesting John bio [...]",
+    "email": "john.notdoe@confab.io",
+    "fullName": "John Notdoe"
+}
+
+###
+DELETE {{Url}}/speakers/{{SpeakerId}}

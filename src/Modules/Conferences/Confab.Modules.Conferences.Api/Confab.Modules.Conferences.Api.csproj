@@ -7,7 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Modules\Conferences\Confab.Modules.Conferences.Core\Confab.Modules.Conferences.Core.csproj" />
     <ProjectReference Include="..\Confab.Modules.Conferences.Core\Confab.Modules.Conferences.Core.csproj" />
   </ItemGroup>
 

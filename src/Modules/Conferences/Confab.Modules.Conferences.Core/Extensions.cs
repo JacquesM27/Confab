@@ -12,7 +12,7 @@ namespace Confab.Modules.Conferences.Core;
 
 internal static class Extensions
 {
-    public static IServiceCollection AddCore(this IServiceCollection services)
+    internal static IServiceCollection AddCore(this IServiceCollection services)
     {
         services.AddPostgres<ConferencesDbContext>();
         services.AddSingleton<IHostDeletionPolicy, HostDeletionPolicy>();
