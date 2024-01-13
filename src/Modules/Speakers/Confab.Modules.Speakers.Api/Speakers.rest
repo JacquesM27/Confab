@@ -1,6 +1,6 @@
 @Url = http://localhost:5084/speakers-module
 
-@SpeakerId = 82680bd4-e7a4-4148-ab0d-93fcadef0568
+@SpeakerId = a2d53452-a4a0-466c-a29f-a7ef87321041
 
 GET {{Url}}
 Accept: application/json

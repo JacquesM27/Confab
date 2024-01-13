@@ -6,8 +6,8 @@ internal class InMemorySpeakerRepository : ISpeakerRepository
 {
     private readonly List<Speaker> _speakers = [];
 
-    public Task<Speaker?> GetAsync(Guid Id)
-        => Task.FromResult(_speakers.SingleOrDefault(x => x.Id == Id));
+    public Task<Speaker?> GetAsync(Guid id)
+        => Task.FromResult(_speakers.SingleOrDefault(x => x.Id == id));
 
     public async Task<IReadOnlyList<Speaker>> BrowseAsync()
     {
