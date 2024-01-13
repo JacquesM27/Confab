@@ -1,22 +1,24 @@
 using Confab.Bootstrapper;
-using Confab.Modules.Conferences.Api;
 using Confab.Shared.Infrastructure;
+using Confab.Shared.Infrastructure.Modules;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+// Load all configuration files. 
+builder.Host.ConfigureModules();
 
-builder.Services
-    .AddInfrastructure();
-
-var assemblies = ModuleLoader.LoadAssemblies();
+var assemblies = ModuleLoader.LoadAssemblies(builder.Configuration);
 var modules = ModuleLoader.LoadModules(assemblies);
+
+// Add services to the container.
+builder.Services
+    .AddInfrastructure(assemblies, modules);
+
 
 foreach (var module in modules)
 {
     module.Register(builder.Services);
 }
-
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
