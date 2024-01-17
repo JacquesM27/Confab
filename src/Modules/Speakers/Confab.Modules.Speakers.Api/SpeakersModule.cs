@@ -10,6 +10,9 @@ public class SpeakersModule : IModule
     internal const string BasePath = "speakers-module";
     public string Name => "Speakers";
     public string Path => BasePath;
+
+    public IEnumerable<string>? Policies { get; } = ["speakers"];
+
     public void Register(IServiceCollection services)
     {
         services.AddCore();
