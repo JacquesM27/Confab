@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Confab.Shared.Infrastructure.Api;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Confab.Modules.Conferences.Api.Controllers;
 
 [Route(ConferencesModule.BasePath + "/[controller]")]
 [ApiController]
+[ProducesDefaultContentType]
 internal abstract class BaseController : ControllerBase
 {
     protected ActionResult<T> OkOrNotFound<T>(T model)

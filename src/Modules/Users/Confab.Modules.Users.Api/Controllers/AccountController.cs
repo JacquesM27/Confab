@@ -1,17 +1,18 @@
 ﻿using Confab.Modules.Users.Core.DTO;
 using Confab.Modules.Users.Core.Services;
 using Confab.Shared.Abstractions.Auth;
+using Confab.Shared.Abstractions.Contexts;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Confab.Modules.Users.Api.Controllers;
 
-internal class AccountController(IIdentityService identityService) : BaseController
+internal class AccountController(IIdentityService identityService, IContext context) : BaseController
 {
     [HttpGet]
     [Authorize]
     public async Task<ActionResult<AccountDto?>> GetAsync()
-        => OkOrNotFound(await identityService.GetAsync(Guid.Parse(User?.Identity?.Name ?? Guid.Empty.ToString())));
+        => OkOrNotFound(await identityService.GetAsync(context.Identity.Id));
 
     [HttpPost("sign-up")]
     public async Task<ActionResult> SignUpAsync(SignUpDto dto)
