@@ -3,10 +3,17 @@ using Confab.Modules.Conferences.Core.Entities;
 using Confab.Modules.Conferences.Core.Exception;
 using Confab.Modules.Conferences.Core.Policies;
 using Confab.Modules.Conferences.Core.Repositories;
+using Confab.Modules.Conferences.Messages.Events;
+using Confab.Shared.Abstractions.Events;
 
 namespace Confab.Modules.Conferences.Core.Services;
 
-internal class ConferenceService(IConferenceRepository conferenceRepository, IHostRepository hostRepository, IConferenceDeletionPolicy conferenceDeletionPolicy) : IConferenceService
+internal class ConferenceService(
+    IConferenceRepository conferenceRepository,
+    IHostRepository hostRepository, 
+    IConferenceDeletionPolicy conferenceDeletionPolicy,
+    IEventDispatcher eventDispatcher
+    ) : IConferenceService
 {
     public async Task AddAsync(ConferenceDetailsDto dto)
     {
@@ -14,7 +21,7 @@ internal class ConferenceService(IConferenceRepository conferenceRepository, IHo
             throw new HostNotFoundException(dto.HostId);
 
         dto.Id = Guid.NewGuid();
-        await conferenceRepository.AddAsync(new Conference()
+        var conference = new Conference()
         {
             Id = dto.Id,
             HostId = dto.HostId,
@@ -25,7 +32,11 @@ internal class ConferenceService(IConferenceRepository conferenceRepository, IHo
             Location = dto.Location,
             LogoUrl = dto.LogoUrl,
             ParticipantsLimit = dto.ParticipantsLimit,
-        });
+        };
+        await conferenceRepository.AddAsync(conference);
+
+         await eventDispatcher.PublishAsync(new ConferenceCreated(conference.Id, conference.Name,
+             conference.ParticipantsLimit, conference.From, conference.To));
     }
 
     public async Task<ConferenceDetailsDto?> GetAsync(Guid id)
