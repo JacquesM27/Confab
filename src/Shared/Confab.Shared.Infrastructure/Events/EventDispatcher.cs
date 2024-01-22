@@ -13,9 +13,5 @@ internal sealed class EventDispatcher(IServiceProvider serviceProvider) : IEvent
         var tasks = handlers.Select(x => x.HandleAsync(@event));
 
         await Task.WhenAll(tasks);
-        // foreach (var handler in handlers)
-        // {
-        //     await handler.HandleAsync(@event);
-        // }
     }
 }

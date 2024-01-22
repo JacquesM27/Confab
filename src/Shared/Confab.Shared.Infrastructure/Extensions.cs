@@ -69,6 +69,8 @@ internal static class Extensions
         services.AddTransient<IContext>(sp => sp.GetRequiredService<IContextFactory>().Create());
         
         services.AddModuleInfo(modules);
+
+        services.AddModuleRequest(assemblies);
         
         services.AddAuth(modules);
         services.AddErrorHandling();
