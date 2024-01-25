@@ -26,9 +26,6 @@ internal class InMemorySpeakerRepository : ISpeakerRepository
         return Task.CompletedTask;
     }
 
-    public Task DeleteAsync(Speaker speaker)
-    {
-        _speakers.Remove(speaker);
-        return Task.CompletedTask;
-    }
+    public Task<bool> ExistsAsync(Guid id) 
+        => Task.FromResult(_speakers.Any(x => x.Id == id));
 }

@@ -2,14 +2,18 @@
 using Confab.Modules.Speakers.Core.Entities;
 using Confab.Modules.Speakers.Core.Exceptions;
 using Confab.Modules.Speakers.Core.Repositories;
+using Confab.Shared.Abstractions.Messaging;
 
 namespace Confab.Modules.Speakers.Core.Services;
 
-internal class SpeakerService(ISpeakerRepository speakerRepository) : ISpeakerService
+internal class SpeakerService(ISpeakerRepository speakerRepository, IMessageBroker messageBroker) : ISpeakerService
 {
-    public async Task AddAsync(SpeakerDto dto)
+    public async Task CreateAsync(SpeakerDto dto)
     {
-        dto.Id = Guid.NewGuid();
+        var alreadyExists = await speakerRepository.ExistsAsync(dto.Id);
+        if (alreadyExists)
+            throw new SpeakerAlreadyExistsException(dto.Id);
+        
         await speakerRepository.AddAsync(new Speaker()
         {
             AvatarUrl = dto.AvatarUrl,
@@ -49,14 +53,6 @@ internal class SpeakerService(ISpeakerRepository speakerRepository) : ISpeakerSe
         speaker.FullName = dto.FullName;
 
         await speakerRepository.UpdateAsync(speaker);
-    }
-
-    public async Task DeleteAsync(Guid id)
-    {
-        var speaker = await speakerRepository.GetAsync(id)
-            ?? throw new SpeakerNotFoundException(id);
-
-        await speakerRepository.DeleteAsync(speaker);
     }
 
     private static T Map<T>(Speaker speaker) where T : SpeakerDto, new()

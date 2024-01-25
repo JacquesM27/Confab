@@ -33,9 +33,6 @@ internal sealed class SpeakerRepository : ISpeakerRepository
         await _dbContext.SaveChangesAsync();
     }
 
-    public async Task DeleteAsync(Speaker speaker)
-    {
-        _speakers.Remove(speaker);
-        await _dbContext.SaveChangesAsync();
-    }
+    public async Task<bool> ExistsAsync(Guid id)
+        => await _speakers.AnyAsync(x => x.Id == id);
 }

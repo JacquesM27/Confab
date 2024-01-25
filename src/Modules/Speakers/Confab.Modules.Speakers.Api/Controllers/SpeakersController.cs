@@ -1,12 +1,13 @@
 ﻿using Confab.Modules.Speakers.Core.DTO;
 using Confab.Modules.Speakers.Core.Services;
+using Confab.Shared.Abstractions.Contexts;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Confab.Modules.Speakers.Api.Controllers;
 
 [Authorize(Policy = Policy)]
-internal class SpeakersController(ISpeakerService speakerService) : BaseController
+internal class SpeakersController(ISpeakerService speakerService, IContext context) : BaseController
 {
     private const string Policy = "speakers";
     
@@ -21,9 +22,10 @@ internal class SpeakersController(ISpeakerService speakerService) : BaseControll
         => Ok(await speakerService.BrowseAsync());
 
     [HttpPost]
-    public async Task<ActionResult> AddAsync(SpeakerDto dto)
+    public async Task<ActionResult> CreateAsync(SpeakerDto dto)
     {
-        await speakerService.AddAsync(dto);
+        dto.Id = context.Identity.Id;
+        await speakerService.CreateAsync(dto);
         return CreatedAtAction(nameof(Get), new { id = dto.Id }, null);
     }
 
@@ -32,13 +34,6 @@ internal class SpeakersController(ISpeakerService speakerService) : BaseControll
     {
         dto.Id = id;
         await speakerService.UpdateAsync(dto);
-        return NoContent();
-    }
-
-    [HttpDelete("{id:guid}")]
-    public async Task<ActionResult> DeleteAsync(Guid id)
-    {
-        await speakerService.DeleteAsync(id);
         return NoContent();
     }
 }
