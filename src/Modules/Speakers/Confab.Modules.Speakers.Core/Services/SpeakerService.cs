@@ -1,5 +1,6 @@
 ﻿using Confab.Modules.Speakers.Core.DTO;
 using Confab.Modules.Speakers.Core.Entities;
+using Confab.Modules.Speakers.Core.Events;
 using Confab.Modules.Speakers.Core.Exceptions;
 using Confab.Modules.Speakers.Core.Repositories;
 using Confab.Shared.Abstractions.Messaging;
@@ -13,15 +14,18 @@ internal class SpeakerService(ISpeakerRepository speakerRepository, IMessageBrok
         var alreadyExists = await speakerRepository.ExistsAsync(dto.Id);
         if (alreadyExists)
             throw new SpeakerAlreadyExistsException(dto.Id);
-        
-        await speakerRepository.AddAsync(new Speaker()
+
+        var speaker = new Speaker()
         {
             AvatarUrl = dto.AvatarUrl,
             Bio = dto.Bio,
             Email = dto.Email,
             FullName = dto.FullName,
             Id = dto.Id
-        });
+        };
+        await speakerRepository.AddAsync(speaker);
+
+        await messageBroker.PublishAsync(new SpeakerCreated(speaker.Id, speaker.FullName));
     }
 
     public async Task<SpeakerDto?> GetAsync(Guid id)
