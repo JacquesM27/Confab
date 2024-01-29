@@ -17,7 +17,6 @@ internal sealed class AgendasModule : IModule
         services.AddDomain();
         services.AddApplication();
         services.AddInfrastructure();
-        throw new NotImplementedException();
     }
 
     public void Use(IApplicationBuilder app)

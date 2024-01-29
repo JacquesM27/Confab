@@ -34,6 +34,10 @@ public sealed class Submission : AggregateRoot
     public Submission(AggregateId id, ConferenceId conferenceId)
         => (Id, ConferenceId) = (id, conferenceId);
 
+    private Submission()
+    {
+    }
+
     public static Submission Create(AggregateId id, ConferenceId conferenceId, string title, string description,
         int level, IEnumerable<string> tags, ICollection<Speaker> speakers)
     {

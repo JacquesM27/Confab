@@ -1,6 +1,7 @@
 ﻿namespace Confab.Shared.Abstractions.Kernel.Types;
 
-public class AggregateId<T>(T value) : IEquatable<AggregateId<T>>
+public class AggregateId<T>(T value) : IEquatable<AggregateId<T>> 
+    where T : notnull
 {
     public T Value { get; } = value;
 

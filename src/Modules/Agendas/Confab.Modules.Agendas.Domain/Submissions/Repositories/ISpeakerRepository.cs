@@ -7,5 +7,5 @@ public interface ISpeakerRepository
 {
     Task<bool> ExistsAsync(AggregateId id);
     Task<IEnumerable<Speaker>> BrowseAsync(IEnumerable<AggregateId> ids);
-    Task CreateAsync(Speaker speaker);
+    Task AddAsync(Speaker speaker);
 }

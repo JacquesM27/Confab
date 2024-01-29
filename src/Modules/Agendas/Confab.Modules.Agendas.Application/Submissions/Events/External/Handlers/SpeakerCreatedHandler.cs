@@ -12,6 +12,6 @@ internal sealed class SpeakerCreatedHandler(ISpeakerRepository speakerRepository
             return;
 
         var speaker = new Speaker(@event.Id, @event.FullName);
-        await speakerRepository.CreateAsync(speaker);
+        await speakerRepository.AddAsync(speaker);
     }
 }
