@@ -5,16 +5,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Confab.Modules.Agendas.Infrastructure.EF.Repositories;
 
-internal sealed class SpeakerRepository : ISpeakerRepository
+internal sealed class SpeakerRepository(AgendasDbContext context) : ISpeakerRepository
 {
-    private readonly AgendasDbContext _context;
-    private readonly DbSet<Speaker> _speakers;
-
-    public SpeakerRepository(AgendasDbContext context)
-    {
-        _context = context;
-        _speakers = _context.Speakers;
-    }
+    private readonly DbSet<Speaker> _speakers = context.Speakers;
 
     public Task<bool> ExistsAsync(AggregateId id)
         => _speakers.AnyAsync(x => x.Id.Equals(id));
@@ -25,6 +18,6 @@ internal sealed class SpeakerRepository : ISpeakerRepository
     public async Task AddAsync(Speaker speaker)
     {
         await _speakers.AddAsync(speaker);
-        await _context.SaveChangesAsync();
+        await context.SaveChangesAsync();
     }
 }
