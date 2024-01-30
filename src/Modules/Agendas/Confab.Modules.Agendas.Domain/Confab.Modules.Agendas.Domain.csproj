@@ -11,7 +11,8 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Agendas\" />
+      <Folder Include="Agendas\Events\" />
+      <Folder Include="Agendas\Services\" />
     </ItemGroup>
 
 </Project>
