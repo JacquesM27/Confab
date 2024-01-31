@@ -42,9 +42,12 @@ public sealed class AgendaItem : AggregateRoot
         int level, IEnumerable<string> tags, ICollection<Speaker> speakers)
     {
         var agendaItem = new AgendaItem(id, conferenceId);
-        agendaItem.IncrementVersion();
-
-        // TODO: other properties
+        agendaItem.ChangeTitle(title);
+        agendaItem.ChangeDescription(description);
+        agendaItem.ChangeLevel(level);
+        agendaItem.ChangeTags(tags);
+        agendaItem.ChangeSpeakers(speakers);
+        agendaItem.Version = 0;
         
         return agendaItem;
     }
@@ -55,6 +58,40 @@ public sealed class AgendaItem : AggregateRoot
             throw new EmptyAgendaItemTitleException(Id);
         Title = title;
         
+        IncrementVersion();
+    }
+
+    public void ChangeDescription(string description)
+    {
+        if (string.IsNullOrWhiteSpace(description))
+            throw new EmptyAgendaItemDescriptionException(Id);
+
+        Description = description;
+        IncrementVersion();
+    }
+
+    public void ChangeLevel(int level)
+    {
+        if (level is < 0 or > 6)
+            throw new InvalidAgendaItemLevelException(Id);
+
+        Level = level;
+        IncrementVersion();
+    }
+
+    public void ChangeTags(IEnumerable<string> tags)
+    {
+        var tagArray = tags?.ToArray();
+        if (tagArray is null || tagArray.Length == 0)
+            throw new EmptyAgendaItemTagsException(Id);
+
+        Tags = tagArray;
+        IncrementVersion();
+    }
+
+    public void ChangeSpeakers(ICollection<Speaker> speakers)
+    {
+        _speakers = speakers;
         IncrementVersion();
     }
 }
