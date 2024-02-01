@@ -1,4 +1,6 @@
-﻿using Confab.Modules.Agendas.Domain.Submissions.Repositories;
+﻿using Confab.Modules.Agendas.Domain.Agendas.Repositories;
+using Confab.Modules.Agendas.Domain.CallForPapers.Repositories;
+using Confab.Modules.Agendas.Domain.Submissions.Repositories;
 using Confab.Modules.Agendas.Infrastructure.EF;
 using Confab.Modules.Agendas.Infrastructure.EF.Repositories;
 using Confab.Shared.Infrastructure.Postgres;
@@ -13,6 +15,9 @@ public static class Extensions
         services.AddPostgres<AgendasDbContext>();
         services.AddScoped<ISpeakerRepository, SpeakerRepository>();
         services.AddScoped<ISubmissionRepository, SubmissionRepository>();
+        services.AddScoped<IAgendaItemRepository, AgendaItemRepository>();
+        services.AddScoped<ICallForPapersRepository, CallForPapersRepository>();
+        services.AddScoped<IAgendaTracksRepository, AgendaTracksRepository>();
         
         return services;
     }

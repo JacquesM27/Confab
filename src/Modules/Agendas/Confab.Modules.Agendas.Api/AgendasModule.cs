@@ -12,6 +12,12 @@ internal sealed class AgendasModule : IModule
     internal const string BasePath = "agendas-module";
     public string Name => "Agendas";
     public string Path => BasePath;
+    
+    public IEnumerable<string> Policies { get; } = new[]
+    {
+        "agendas", "cfp", "submissions"
+    };
+
     public void Register(IServiceCollection services)
     {
         services.AddDomain();

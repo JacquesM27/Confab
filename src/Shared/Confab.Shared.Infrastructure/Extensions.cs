@@ -3,6 +3,7 @@ using System.Runtime.CompilerServices;
 using Confab.Shared.Abstractions;
 using Confab.Shared.Abstractions.Contexts;
 using Confab.Shared.Abstractions.Modules;
+using Confab.Shared.Abstractions.Storage;
 using Confab.Shared.Infrastructure.Api;
 using Confab.Shared.Infrastructure.Auth;
 using Confab.Shared.Infrastructure.Commands;
@@ -14,6 +15,7 @@ using Confab.Shared.Infrastructure.Messaging;
 using Confab.Shared.Infrastructure.Modules;
 using Confab.Shared.Infrastructure.Queries;
 using Confab.Shared.Infrastructure.Services;
+using Confab.Shared.Infrastructure.Storage;
 using Confab.Shared.Infrastructure.Time;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
@@ -68,6 +70,8 @@ internal static class Extensions
             });
         });
 
+        services.AddMemoryCache();
+        services.AddSingleton<IRequestStorage, RequestStorage>();
         services.AddSingleton<IContextFactory, ContextFactory>();
         services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
         services.AddTransient<IContext>(sp => sp.GetRequiredService<IContextFactory>().Create());

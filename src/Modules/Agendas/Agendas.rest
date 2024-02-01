@@ -1,0 +1,17 @@
+@Url = http://localhost:5084/agendas-module
+
+
+GET {{Url}}
+Accept: application/json
+
+@accessToken = eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJmNmI3YjgwMC01ZDgxLTRiYmYtOGQ5Yi1hNzlkMGNjY2IyZWYiLCJ1bmlxdWVfbmFtZSI6ImY2YjdiODAwLTVkODEtNGJiZi04ZDliLWE3OWQwY2NjYjJlZiIsImp0aSI6IjRkMGNhMThmLTczZTAtNDEwOS1iZjg0LTdiZjJhMjJlMmU5NCIsImlhdCI6IjE3MDY4MTU0MzQwMTciLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJ1c2VyIiwicGVybWlzc2lvbnMiOlsiY29uZmVyZW5jZXMiLCJob3N0cyIsInNwZWFrZXJzIiwidXNlcnMiLCJhZ2VuZGFzIiwiY2ZwIiwic3VibWlzc2lvbnMiXSwibmJmIjoxNzA2ODE1NDM0LCJleHAiOjE3MDY4MTkwMzQsImlzcyI6ImNvbmZhYiJ9.8tLaSHAaNoh-lpfLogwtlwJrGmXDhEjx5myCh1jP686z8QOn30PEZZqYECXTBkT3caJWH3T1NTzco_g2OGkUqQ
+
+###
+POST {{Url}}/agendas/tracks
+Authorization: Bearer {{accessToken}}
+Content-Type: application/json
+
+{
+    "conferenceId": "877cc734-6c15-430c-accc-35ad84904141",
+    "name": "Agenda track #1"
+}
