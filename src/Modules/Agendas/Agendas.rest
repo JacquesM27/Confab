@@ -21,19 +21,24 @@ Content-Type: application/json
 @TrackId = 9ba85f9e-6a12-4c38-ba8f-c57587d87271
 
 ###
-POST {{Url}}/agendas/slots
+GET {{Url}}/agendas/{{ConferenceId}}/tracks/{{TrackId}}
+Accept: application/json
+
+###
+POST {{Url}}/agendas/{{ConferenceId}}/slots
 Authorization: Bearer {{accessToken}}
 Content-Type: application/json
 
 {
     "agendaTrackId": "{{TrackId}}",
-    "from": "2024-01-20T12:20:00",
-    "to": "2024-01-24T13:50:00",
-    "participantsLimit": 100,
+    "from": "2024-01-25T12:20:00",
+    "to": "2024-01-25T13:50:00",
+    "participantsLimit": 5,
     "type": "Regular"
 }
 
-@SlotId = 504e3821-f563-4623-8d43-8c770b3ecfe1
+###
+@SlotId = 76a25bfa-d0d8-41e3-ac37-e4c7869f2a92
 
 ###
 POST {{Url}}/conferences/{{ConferenceId}}/cfp
@@ -41,8 +46,8 @@ Authorization: Bearer {{accessToken}}
 Content-Type: application/json
 
 {
-    "from": "2024-01-20T12:20:00",
-    "to": "2024-01-24T13:50:00"
+    "from": "2024-01-25T12:20:00",
+    "to": "2024-01-25T13:50:00"
 }
 
 ###

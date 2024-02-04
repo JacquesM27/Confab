@@ -61,7 +61,7 @@ internal static class AgendaExtension
             To = slot.To,
             Type = AgendaSlotType.Regular,
             ParticipantsLimit = slot.ParticipantsLimit,
-            AgendaItem = new AgendaItemDto()
+            AgendaItem = slot.AgendaItem is null ? null : new AgendaItemDto()
             {
                 Id = slot.AgendaItem.Id,
                 ConferenceId = slot.AgendaItem.ConferenceId,
