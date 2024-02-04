@@ -1,8 +1,8 @@
 @Url = http://localhost:5084/users-module
-@email = user1@confab.io
+@email = user2@confab.io
 @password = secret
 @role = user
-@accessToken = eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhNDJjMTMxNi05N2ZmLTQ3NzUtOWE5OS0wNWZmNzU1ZjM3ZjQiLCJ1bmlxdWVfbmFtZSI6ImE0MmMxMzE2LTk3ZmYtNDc3NS05YTk5LTA1ZmY3NTVmMzdmNCIsImp0aSI6IjU5OGNjZGQ4LTYzN2ItNDBjNi05NzVjLThhZDI3YTE1MTAwZiIsImlhdCI6IjE3MDU4NTcxOTM4ODMiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJ1c2VyIiwicGVybWlzc2lvbnMiOlsiY29uZmVyZW5jZXMiLCJob3N0cyIsInNwZWFrZXJzIiwidXNlcnMiXSwibmJmIjoxNzA1ODU3MTkzLCJleHAiOjE3MDU4NjA3OTMsImlzcyI6ImNvbmZhYiJ9.iLXbOyGsDLBmmWc-nmEBTUvV-CqncGXSzBmTKGfI8ezyOlHJtXHWvNGKVgn5PSe3nlLnZQKF5QsNWnVHOUdyFw
+@accessToken = eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJmNmI3YjgwMC01ZDgxLTRiYmYtOGQ5Yi1hNzlkMGNjY2IyZWYiLCJ1bmlxdWVfbmFtZSI6ImY2YjdiODAwLTVkODEtNGJiZi04ZDliLWE3OWQwY2NjYjJlZiIsImp0aSI6IjYzZDg2YTY1LTdiZDAtNGMyZi05Yzc0LWZhOWNiNjJkN2UwNyIsImlhdCI6IjE3MDY5OTU5NTQ2ODkiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJ1c2VyIiwicGVybWlzc2lvbnMiOlsiY29uZmVyZW5jZXMiLCJob3N0cyIsInNwZWFrZXJzIiwidXNlcnMiLCJhZ2VuZGFzIiwiY2ZwIiwic3VibWlzc2lvbnMiXSwibmJmIjoxNzA2OTk1OTU0LCJleHAiOjE3MDY5OTk1NTQsImlzcyI6ImNvbmZhYiJ9.VAfYNIXQn-2wZG0Ooil4yJw2RHudgccxb2bB32Bd8c8EiKEr3lpPaU1VCypiqtnUY2DbSeW0WQaOgb37UKygZg
 
 GET {{Url}}
 Accept: application/json
@@ -20,7 +20,7 @@ Content-Type: application/json
     "password": "{{password}}",
     "role": "{{role}}",
     "claims": {
-        "permissions": ["conferences", "hosts", "speakers", "users"]
+        "permissions": ["conferences", "hosts", "speakers", "users",  "agendas", "cfp", "submissions"]
     }
 }
 

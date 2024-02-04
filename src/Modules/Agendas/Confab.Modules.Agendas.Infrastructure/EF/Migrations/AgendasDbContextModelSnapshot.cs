@@ -44,7 +44,7 @@ namespace Confab.Modules.Agendas.Infrastructure.EF.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<Guid>("AgendaSlotId")
+                    b.Property<Guid?>("AgendaSlotId")
                         .HasColumnType("uuid");
 
                     b.Property<Guid>("ConferenceId")
@@ -237,7 +237,7 @@ namespace Confab.Modules.Agendas.Infrastructure.EF.Migrations
                 {
                     b.HasBaseType("Confab.Modules.Agendas.Domain.Agendas.Entities.AgendaSlot");
 
-                    b.Property<Guid>("AgendaItemId")
+                    b.Property<Guid?>("AgendaItemId")
                         .HasColumnType("uuid");
 
                     b.Property<int?>("ParticipantsLimit")
@@ -267,9 +267,7 @@ namespace Confab.Modules.Agendas.Infrastructure.EF.Migrations
                 {
                     b.HasOne("Confab.Modules.Agendas.Domain.Agendas.Entities.AgendaSlot", "AgendaSlot")
                         .WithMany()
-                        .HasForeignKey("AgendaSlotId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("AgendaSlotId");
 
                     b.Navigation("AgendaSlot");
                 });
@@ -304,9 +302,7 @@ namespace Confab.Modules.Agendas.Infrastructure.EF.Migrations
                 {
                     b.HasOne("Confab.Modules.Agendas.Domain.Agendas.Entities.AgendaItem", "AgendaItem")
                         .WithMany()
-                        .HasForeignKey("AgendaItemId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("AgendaItemId");
 
                     b.Navigation("AgendaItem");
                 });

@@ -7,7 +7,7 @@ internal sealed class DomainEventDispatcher(IServiceProvider serviceProvider) : 
 {
     public async Task DispatchAsync(params IDomainEvent[]? events)
     {
-        if (events is null || events.Length != 0)
+        if (events is null || events.Length == 0)
         {
             return;
         }

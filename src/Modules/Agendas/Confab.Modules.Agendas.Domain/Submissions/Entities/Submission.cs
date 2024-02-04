@@ -70,7 +70,7 @@ public sealed class Submission : AggregateRoot
         if (string.IsNullOrWhiteSpace(description))
             throw new EmptySubmissionDescriptionException(Id);
             
-        Title = description;
+        Description = description;
         IncrementVersion();
     }
 

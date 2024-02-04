@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Confab.Modules.Agendas.Api.Controllers;
 
-[Microsoft.AspNetCore.Components.Route(AgendasModule.BasePath + "/conferences/{conferenceId:guid}/cfp")]
+[Route(AgendasModule.BasePath + "/conferences/{conferenceId:guid}/cfp")]
 [Authorize(Policy)]
 internal class CallForPapersController(
     ICommandDispatcher commandDispatcher,
@@ -27,6 +27,7 @@ internal class CallForPapersController(
     public async Task<ActionResult> CreateAsync(Guid conferenceId, CreateCallForPapers command)
     {
         await commandDispatcher.SendAsync(command.Bind(x => x.ConferenceId, conferenceId));
+        //await commandDispatcher.SendAsync(command);
         return CreatedAtAction(nameof(Get), new { conferenceId = command.ConferenceId }, null);
     }
 

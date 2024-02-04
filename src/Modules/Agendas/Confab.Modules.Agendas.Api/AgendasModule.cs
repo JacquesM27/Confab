@@ -1,7 +1,11 @@
 ﻿using Confab.Modules.Agendas.Application;
+using Confab.Modules.Agendas.Application.Agendas.DTO;
+using Confab.Modules.Agendas.Application.Agendas.Queries;
 using Confab.Modules.Agendas.Domain;
 using Confab.Modules.Agendas.Infrastructure;
 using Confab.Shared.Abstractions.Modules;
+using Confab.Shared.Abstractions.Queries;
+using Confab.Shared.Infrastructure.Modules;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -27,5 +31,8 @@ internal sealed class AgendasModule : IModule
 
     public void Use(IApplicationBuilder app)
     {
+        app.UseModuleRequest()
+            .Subscribe<GetRegularAgendaSlot, RegularAgendaSlotDto>("agendas/slots/regular/get",
+                (query, serviceProvider) => serviceProvider.GetRequiredService<IQueryDispatcher>().QueryAsync(query));
     }
 }

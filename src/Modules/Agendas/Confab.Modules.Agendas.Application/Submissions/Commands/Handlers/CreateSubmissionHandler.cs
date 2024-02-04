@@ -30,7 +30,8 @@ internal sealed class CreateSubmissionHandler(
             throw new CallForPapersClosedException(command.ConferenceId);
         
         var speakerIds = command.SpeakerIds.Select(x => new AggregateId(x)).ToArray();
-        var speakers = (await speakerRepository.BrowseAsync(speakerIds)).ToList();
+        var test = await speakerRepository.BrowseAsync(speakerIds);
+        var speakers = test.ToList();
 
         if (speakerIds.Length != speakers.Count)
             throw new InvalidSpeakersNumberException(command.Id);

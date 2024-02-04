@@ -16,7 +16,7 @@ public sealed class AgendaItem : AggregateRoot
     private ICollection<Speaker> _speakers = new List<Speaker>();
 
     //For EF
-    public AgendaSlot AgendaSlot { get; private set; }
+    public AgendaSlot? AgendaSlot { get; private set; }
 
     public AgendaItem(AggregateId id, ConferenceId conferenceId, string title, string description,
         int level, IEnumerable<string> tags, ICollection<Speaker> speakers, int version = 0)

@@ -1,0 +1,8 @@
+﻿{
+  "attendances": {
+    "module": {
+      "name": "Attendances",
+      "enabled": true
+    }
+  }
+}

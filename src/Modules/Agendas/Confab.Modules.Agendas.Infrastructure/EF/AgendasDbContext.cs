@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Confab.Modules.Agendas.Infrastructure.EF;
 
-internal sealed class AgendasDbContext(DbContextOptions<AgendasDbContext> options) 
+public class AgendasDbContext(DbContextOptions<AgendasDbContext> options) 
     : DbContext(options)
 {
     public DbSet<Speaker> Speakers { get; set; }

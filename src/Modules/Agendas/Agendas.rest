@@ -4,7 +4,9 @@
 GET {{Url}}
 Accept: application/json
 
-@accessToken = eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJmNmI3YjgwMC01ZDgxLTRiYmYtOGQ5Yi1hNzlkMGNjY2IyZWYiLCJ1bmlxdWVfbmFtZSI6ImY2YjdiODAwLTVkODEtNGJiZi04ZDliLWE3OWQwY2NjYjJlZiIsImp0aSI6IjRkMGNhMThmLTczZTAtNDEwOS1iZjg0LTdiZjJhMjJlMmU5NCIsImlhdCI6IjE3MDY4MTU0MzQwMTciLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJ1c2VyIiwicGVybWlzc2lvbnMiOlsiY29uZmVyZW5jZXMiLCJob3N0cyIsInNwZWFrZXJzIiwidXNlcnMiLCJhZ2VuZGFzIiwiY2ZwIiwic3VibWlzc2lvbnMiXSwibmJmIjoxNzA2ODE1NDM0LCJleHAiOjE3MDY4MTkwMzQsImlzcyI6ImNvbmZhYiJ9.8tLaSHAaNoh-lpfLogwtlwJrGmXDhEjx5myCh1jP686z8QOn30PEZZqYECXTBkT3caJWH3T1NTzco_g2OGkUqQ
+@accessToken = eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJmNmI3YjgwMC01ZDgxLTRiYmYtOGQ5Yi1hNzlkMGNjY2IyZWYiLCJ1bmlxdWVfbmFtZSI6ImY2YjdiODAwLTVkODEtNGJiZi04ZDliLWE3OWQwY2NjYjJlZiIsImp0aSI6IjkyZWQ4MGQ1LTUyNzctNDk0Yi1hMTgzLTQxYmVhZWI3ZjU1MCIsImlhdCI6IjE3MDcwNjMxNTY5NDMiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJ1c2VyIiwicGVybWlzc2lvbnMiOlsiY29uZmVyZW5jZXMiLCJob3N0cyIsInNwZWFrZXJzIiwidXNlcnMiLCJhZ2VuZGFzIiwiY2ZwIiwic3VibWlzc2lvbnMiXSwibmJmIjoxNzA3MDYzMTU2LCJleHAiOjE3MDcwNjY3NTYsImlzcyI6ImNvbmZhYiJ9.elAAch8qqXomFTs8fhHhR_Hqc3nxBjEeCPr7EtpfVr0xoGrilwfLqERIY3s0zBoEX1_WLR0g_j4xmxoTTFu97Q
+
+@ConferenceId = b792bb9a-41df-4c30-9502-83cf15824ed8
 
 ###
 POST {{Url}}/agendas/tracks
@@ -12,6 +14,83 @@ Authorization: Bearer {{accessToken}}
 Content-Type: application/json
 
 {
-    "conferenceId": "877cc734-6c15-430c-accc-35ad84904141",
-    "name": "Agenda track #1"
+    "conferenceId": "{{ConferenceId}}",
+    "name": "Agenda track #3"
+}
+
+@TrackId = 9ba85f9e-6a12-4c38-ba8f-c57587d87271
+
+###
+POST {{Url}}/agendas/slots
+Authorization: Bearer {{accessToken}}
+Content-Type: application/json
+
+{
+    "agendaTrackId": "{{TrackId}}",
+    "from": "2024-01-20T12:20:00",
+    "to": "2024-01-24T13:50:00",
+    "participantsLimit": 100,
+    "type": "Regular"
+}
+
+@SlotId = 504e3821-f563-4623-8d43-8c770b3ecfe1
+
+###
+POST {{Url}}/conferences/{{ConferenceId}}/cfp
+Authorization: Bearer {{accessToken}}
+Content-Type: application/json
+
+{
+    "from": "2024-01-20T12:20:00",
+    "to": "2024-01-24T13:50:00"
+}
+
+###
+PUT {{Url}}/conferences/{{ConferenceId}}/cfp/open
+Authorization: Bearer {{accessToken}}
+Content-Type: application/json
+
+{
+    
+}
+
+@SpeakerId = f6b7b800-5d81-4bbf-8d9b-a79d0cccb2ef
+
+###
+POST {{Url}}/submissions
+Authorization: Bearer {{accessToken}}
+Content-Type: application/json
+
+{
+    "conferenceId": "{{ConferenceId}}",
+    "title": "test submission",
+    "description": "this is description of test submission",
+    "level": 3,
+    "tags": [
+        "stationary",
+        "dotnet"
+    ],
+    "speakerIds": [
+        "{{SpeakerId}}"
+    ]
+}
+
+@SubmissionId = 552b3833-17ce-439c-b4c1-9b3ad29c503c
+
+###
+PUT {{Url}}/submissions/{{SubmissionId}}/approve
+Authorization: Bearer {{accessToken}}
+
+@AgendaItem = 552b3833-17ce-439c-b4c1-9b3ad29c503c
+
+
+###
+PUT {{Url}}/agendas/{{ConferenceId}}/slots/regular
+Authorization: Bearer {{accessToken}}
+Content-Type: application/json
+
+{
+    "agendaTrackId": "{{TrackId}}",
+    "agendaSlotId": "{{SlotId}}",
+    "agendaItemId": "{{AgendaItem}}"
 }

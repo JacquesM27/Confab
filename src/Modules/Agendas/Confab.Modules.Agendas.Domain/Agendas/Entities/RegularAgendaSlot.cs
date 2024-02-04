@@ -6,7 +6,7 @@ namespace Confab.Modules.Agendas.Domain.Agendas.Entities;
 public sealed class RegularAgendaSlot : AgendaSlot
 {
     public int? ParticipantsLimit { get; private set; }
-    public AgendaItem AgendaItem { get; private set; }
+    public AgendaItem? AgendaItem { get; private set; }
 
     public RegularAgendaSlot(EntityId id, DateTime from, DateTime to, AgendaItem agendaItem)
         : base(id, from, to)

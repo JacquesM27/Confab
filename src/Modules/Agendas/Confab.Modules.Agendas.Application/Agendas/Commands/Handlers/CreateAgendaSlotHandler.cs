@@ -14,8 +14,8 @@ internal sealed class CreateAgendaSlotHandler(
 {
     public async Task HandleAsync(CreateAgendaSlot command)
     {
-        var agendaTrack = await repository.GetAsync(command.Id)
-                          ?? throw new AgendaTrackNotFoundException(command.Id);
+        var agendaTrack = await repository.GetAsync(command.AgendaTrackId)
+                          ?? throw new AgendaTrackNotFoundException(command.AgendaTrackId);
 
         if (command.Type == AgendaSlotType.Regular)
             agendaTrack.AddRegularSlot(command.Id, command.From, command.To, command.ParticipantsLimit);

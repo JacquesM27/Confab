@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Confab.Modules.Agendas.Api.Controllers;
 
-[Microsoft.AspNetCore.Components.Route(AgendasModule.BasePath + "/agendas/{conferenceId:guid}")]
+[Route(AgendasModule.BasePath + "/agendas/{conferenceId:guid}")]
 [Authorize(Policy)]
 internal class AgendasController(
     ICommandDispatcher commandDispatcher,
@@ -42,8 +42,8 @@ internal class AgendasController(
     [HttpPost("tracks")]
     public async Task<ActionResult> CreateAgendaTrackAsync(Guid conferenceId, CreateAgendaTrack command)
     {
-        //await commandDispatcher.SendAsync(command.Bind(x => x.ConferenceId, conferenceId));
-        await commandDispatcher.SendAsync(command);
+        await commandDispatcher.SendAsync(command.Bind(x => x.ConferenceId, conferenceId));
+        //await commandDispatcher.SendAsync(command);
         AddResourceIdHeader(command.Id);
         return NoContent();
     }

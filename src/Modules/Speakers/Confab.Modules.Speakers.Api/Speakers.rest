@@ -2,17 +2,20 @@
 
 @SpeakerId = a2d53452-a4a0-466c-a29f-a7ef87321041
 
+@accessToken = eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJmNmI3YjgwMC01ZDgxLTRiYmYtOGQ5Yi1hNzlkMGNjY2IyZWYiLCJ1bmlxdWVfbmFtZSI6ImY2YjdiODAwLTVkODEtNGJiZi04ZDliLWE3OWQwY2NjYjJlZiIsImp0aSI6IjYzZDg2YTY1LTdiZDAtNGMyZi05Yzc0LWZhOWNiNjJkN2UwNyIsImlhdCI6IjE3MDY5OTU5NTQ2ODkiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJ1c2VyIiwicGVybWlzc2lvbnMiOlsiY29uZmVyZW5jZXMiLCJob3N0cyIsInNwZWFrZXJzIiwidXNlcnMiLCJhZ2VuZGFzIiwiY2ZwIiwic3VibWlzc2lvbnMiXSwibmJmIjoxNzA2OTk1OTU0LCJleHAiOjE3MDY5OTk1NTQsImlzcyI6ImNvbmZhYiJ9.VAfYNIXQn-2wZG0Ooil4yJw2RHudgccxb2bB32Bd8c8EiKEr3lpPaU1VCypiqtnUY2DbSeW0WQaOgb37UKygZg
+
 GET {{Url}}
 Accept: application/json
 
 ###
 POST {{Url}}/speakers
 Content-Type: application/json
+Authorization: Bearer {{accessToken}}
 
 {
     "bio": "Interesting John bio [...]",
-    "email": "john.doe@confab.io",
-    "fullName": "John Doe"
+    "email": "john.doe.third@confab.io",
+    "fullName": "John Doe III"
 }
 
 ###

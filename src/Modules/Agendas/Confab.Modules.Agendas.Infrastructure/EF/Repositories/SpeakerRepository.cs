@@ -13,7 +13,7 @@ internal sealed class SpeakerRepository(AgendasDbContext context) : ISpeakerRepo
         => _speakers.AnyAsync(x => x.Id.Equals(id));
 
     public async Task<IEnumerable<Speaker>> BrowseAsync(IEnumerable<AggregateId> ids)
-        => await _speakers.Where(x => ids.Equals(x.Id)).ToListAsync();
+        => await _speakers.Where(x => ids.Select(y => y.Value).Contains(x.Id)).ToListAsync();
 
     public async Task AddAsync(Speaker speaker)
     {

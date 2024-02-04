@@ -43,7 +43,7 @@ Authorization: Bearer {{accessToken}}
 
 ###### CONFERENCES ######
 
-@ConferenceId = 877cc734-6c15-430c-accc-35ad84904141
+@ConferenceId = b792bb9a-41df-4c30-9502-83cf15824ed8
 ###
 POST {{Url}}/conferences
 Content-Type: application/json

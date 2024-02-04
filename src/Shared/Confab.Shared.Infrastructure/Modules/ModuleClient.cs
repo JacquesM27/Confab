@@ -7,6 +7,18 @@ internal sealed class ModuleClient(
     IModuleSerializer moduleSerializer
     ) : IModuleClient
 {
+    public async Task<TResult> SendAsync<TResult>(string path, object request) where TResult : class
+    {
+        var registration = moduleRegistry.GetRequestRegistrations(path);
+        if (registration is null)
+            throw new InvalidOperationException($"No action has been defined for path: '{path}'.");
+
+        var receiverRequest = TranslateType(request, registration.RequestType);
+        var result = await registration.Action(receiverRequest);
+
+        return result is null ? null : TranslateType<TResult>(result);
+    }
+
     public async Task PublishAsync(object message)
     {
         var key = message.GetType().Name;
@@ -25,6 +37,8 @@ internal sealed class ModuleClient(
         await Task.WhenAll(tasks);
     }
 
+    private T TranslateType<T>(object value)
+        => moduleSerializer.Deserialize<T>(moduleSerializer.Serialize(value))!;
     private object TranslateType(object value, Type type)
         => moduleSerializer.Deserialize(moduleSerializer.Serialize(value), type)!;
 }
