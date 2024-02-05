@@ -2,7 +2,7 @@
 
 namespace Confab.Modules.Attendances.Api.Controllers;
 
-[Microsoft.AspNetCore.Components.Route(AttendancesModule.BasePath)]
+[Route(AttendancesModule.BasePath)]
 internal class HomeController : BaseController
 {
     [HttpGet]

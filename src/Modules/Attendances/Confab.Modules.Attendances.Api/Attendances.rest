@@ -1,26 +1,18 @@
-@Url = http://localhost:5084/tickets-module
+@Url = http://localhost:5084/attendances-module
 
 
 GET {{Url}}
+Accept: application/json
 
 ###
 @accessToken = eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1OGIwOTRiMi1jNmMyLTRkYjUtYTI4Mi02MjRhMWZhODQ5YzQiLCJ1bmlxdWVfbmFtZSI6IjU4YjA5NGIyLWM2YzItNGRiNS1hMjgyLTYyNGExZmE4NDljNCIsImp0aSI6IjM3ODVlODRmLWNkM2UtNGEwNy1iN2NmLWRiNmZhNzI0OWRmMSIsImlhdCI6IjE3MDcxNjY4NDczODMiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJ1c2VyIiwicGVybWlzc2lvbnMiOlsiY29uZmVyZW5jZXMiLCJob3N0cyIsInNwZWFrZXJzIiwidXNlcnMiLCJhZ2VuZGFzIiwiY2ZwIiwic3VibWlzc2lvbnMiLCJ0aWNrZXRzIl0sIm5iZiI6MTcwNzE2Njg0NywiZXhwIjoxNzA3MTcwNDQ3LCJpc3MiOiJjb25mYWIifQ.Rup8KJchS_0uaCjlPvLyk8rpmXUfBUBggzzaOXVj1cT-ZcE9y6x5RjX6E7QalnsftUHU0bXO8KetN7gqFixuTQ
 
-@conferenceId = b792bb9a-41df-4c30-9502-83cf15824ed8
+@eventId = a7075602-3de6-43db-80ed-cfdc933097cf
 
 ###
-POST {{Url}}/sales/conferences/{{conferenceId}}
+POST {{Url}}/attendances/events/{{eventId}}/attend
 Authorization: Bearer {{accessToken}}
 Content-Type: application/json
 
 {
-    "name": "ticket sale number one",
-    "price": 2137,
-    "amount": 100,
-    "from": "2024-01-25T12:20:00",
-    "to": "2025-01-25T13:50:00"
 }
-
-###
-POST {{Url}}/tickets/conference/{{conferenceId}}/purchase
-Authorization: Bearer {{accessToken}}

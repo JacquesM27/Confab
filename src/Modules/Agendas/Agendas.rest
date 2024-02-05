@@ -4,7 +4,7 @@
 GET {{Url}}
 Accept: application/json
 
-@accessToken = eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJmNmI3YjgwMC01ZDgxLTRiYmYtOGQ5Yi1hNzlkMGNjY2IyZWYiLCJ1bmlxdWVfbmFtZSI6ImY2YjdiODAwLTVkODEtNGJiZi04ZDliLWE3OWQwY2NjYjJlZiIsImp0aSI6IjkyZWQ4MGQ1LTUyNzctNDk0Yi1hMTgzLTQxYmVhZWI3ZjU1MCIsImlhdCI6IjE3MDcwNjMxNTY5NDMiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJ1c2VyIiwicGVybWlzc2lvbnMiOlsiY29uZmVyZW5jZXMiLCJob3N0cyIsInNwZWFrZXJzIiwidXNlcnMiLCJhZ2VuZGFzIiwiY2ZwIiwic3VibWlzc2lvbnMiXSwibmJmIjoxNzA3MDYzMTU2LCJleHAiOjE3MDcwNjY3NTYsImlzcyI6ImNvbmZhYiJ9.elAAch8qqXomFTs8fhHhR_Hqc3nxBjEeCPr7EtpfVr0xoGrilwfLqERIY3s0zBoEX1_WLR0g_j4xmxoTTFu97Q
+@accessToken = eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJmNmI3YjgwMC01ZDgxLTRiYmYtOGQ5Yi1hNzlkMGNjY2IyZWYiLCJ1bmlxdWVfbmFtZSI6ImY2YjdiODAwLTVkODEtNGJiZi04ZDliLWE3OWQwY2NjYjJlZiIsImp0aSI6IjRhZWU0ZDczLTkwMzAtNDc1Ny1iZjY1LTZlMTIyNGI1OTI5NiIsImlhdCI6IjE3MDcxMzI0Mjk1MDUiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJ1c2VyIiwicGVybWlzc2lvbnMiOlsiY29uZmVyZW5jZXMiLCJob3N0cyIsInNwZWFrZXJzIiwidXNlcnMiLCJhZ2VuZGFzIiwiY2ZwIiwic3VibWlzc2lvbnMiXSwibmJmIjoxNzA3MTMyNDI5LCJleHAiOjE3MDcxMzYwMjksImlzcyI6ImNvbmZhYiJ9.TerT1YXr7Wjq5CopC6YFsy7jfGv1oMDUcy_O8lPofEjGEmQIv2z_8bfB-qtI8y06NOpnPGxdRSllBiCyVl8aPA
 
 @ConferenceId = b792bb9a-41df-4c30-9502-83cf15824ed8
 
@@ -68,8 +68,8 @@ Content-Type: application/json
 
 {
     "conferenceId": "{{ConferenceId}}",
-    "title": "test submission",
-    "description": "this is description of test submission",
+    "title": "test submission3",
+    "description": "this is description of test submission3",
     "level": 3,
     "tags": [
         "stationary",
@@ -80,13 +80,14 @@ Content-Type: application/json
     ]
 }
 
-@SubmissionId = 552b3833-17ce-439c-b4c1-9b3ad29c503c
+###
+@SubmissionId = a7075602-3de6-43db-80ed-cfdc933097cf
 
 ###
 PUT {{Url}}/submissions/{{SubmissionId}}/approve
 Authorization: Bearer {{accessToken}}
 
-@AgendaItem = 552b3833-17ce-439c-b4c1-9b3ad29c503c
+@AgendaItemId = a7075602-3de6-43db-80ed-cfdc933097cf
 
 
 ###
@@ -97,5 +98,5 @@ Content-Type: application/json
 {
     "agendaTrackId": "{{TrackId}}",
     "agendaSlotId": "{{SlotId}}",
-    "agendaItemId": "{{AgendaItem}}"
+    "agendaItemId": "{{AgendaItemId}}"
 }

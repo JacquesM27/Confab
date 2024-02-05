@@ -13,6 +13,7 @@ using Confab.Shared.Infrastructure.Exceptions;
 using Confab.Shared.Infrastructure.Kernel;
 using Confab.Shared.Infrastructure.Messaging;
 using Confab.Shared.Infrastructure.Modules;
+using Confab.Shared.Infrastructure.Postgres;
 using Confab.Shared.Infrastructure.Queries;
 using Confab.Shared.Infrastructure.Services;
 using Confab.Shared.Infrastructure.Storage;
@@ -88,6 +89,9 @@ internal static class Extensions
         services.AddDomainEvents(assemblies);
         services.AddEvents(assemblies);
         services.AddMessaging();
+
+        services.AddPostgres();
+        services.AddTransactionalDecorations();
         
         services.AddSingleton<IClock, UtcClock>();
         services.AddHostedService<AppInitializer>();
@@ -152,5 +156,18 @@ internal static class Extensions
         var options = new T();
         configuration.GetSection(sectionName).Bind(options);
         return options;
+    }
+
+    public static string GetModuleName(this object value)
+        => value?.GetType().GetModuleName() ?? string.Empty;
+
+    public static string GetModuleName(this Type type)
+    {
+        if (type?.Namespace is null)
+            return string.Empty;
+
+        return type.Namespace.StartsWith("Confab.Modules.")
+            ? type.Namespace.Split(".")[2].ToLowerInvariant()
+            : string.Empty;
     }
 }

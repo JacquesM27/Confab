@@ -1,8 +1,10 @@
 ﻿using Confab.Modules.Tickets.Core.DTO;
 using Confab.Modules.Tickets.Core.Entities;
+using Confab.Modules.Tickets.Core.Events;
 using Confab.Modules.Tickets.Core.Exceptions;
 using Confab.Modules.Tickets.Core.Repositories;
 using Confab.Shared.Abstractions;
+using Confab.Shared.Abstractions.Messaging;
 using Microsoft.Extensions.Logging;
 
 namespace Confab.Modules.Tickets.Core.Services;
@@ -13,15 +15,17 @@ internal sealed class TicketService(
     ITicketRepository ticketRepository,
     ITicketSaleRepository ticketSaleRepository,
     ITicketGenerator ticketGenerator,
-    ILogger<TicketService> logger) : ITicketService
+    ILogger<TicketService> logger,
+    IMessageBroker messageBroker) : ITicketService
 {
     public async Task PurchaseAsync(Guid conferenceId, Guid userId)
     {
         var conference = await conferenceRepository.GetAsync(conferenceId) 
             ?? throw new ConferenceNotFoundException(conferenceId);
 
-        var ticket = await ticketRepository.GetAsync(conferenceId, userId) 
-            ?? throw new TicketAlreadyPurchasedException(conferenceId, userId);
+        var ticket = await ticketRepository.GetAsync(conferenceId, userId);
+        if (ticket is not null)
+            throw new TicketAlreadyPurchasedException(conferenceId, userId);
 
         var ticketSale = await ticketSaleRepository.GetCurrentForConferenceAsync(conferenceId, clock.CurrentDate())
             ?? throw new TicketSaleUnavailableException(conferenceId);
@@ -37,6 +41,7 @@ internal sealed class TicketService(
         await ticketRepository.AddAsync(ticket);
         logger.LogInformation($"Ticket with ID: '{ticket.Id}' was generated for the conference: " +
                               $"'{conferenceId}' by user: '{userId}'.");
+        messageBroker.PublishAsync(new TicketPurchased(ticket.Id, conferenceId, userId));
     }
 
     private async Task PurchaseAvailableAsync(TicketSale ticketSale, Guid userId, decimal? price)
@@ -51,6 +56,7 @@ internal sealed class TicketService(
         await ticketRepository.UpdateAsync(ticket);
         logger.LogInformation($"Ticket with ID: '{ticket.Id}' was purchased for the conference:" +
                               $"'{conferenceId}' by user: '{userId}'");
+        messageBroker.PublishAsync(new TicketPurchased(ticket.Id, conferenceId, userId));
     }
     
     public async Task<IEnumerable<TicketDto>> GetForUserAsync(Guid userId)

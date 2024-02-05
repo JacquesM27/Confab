@@ -40,7 +40,6 @@ public class AttendableEvent : AggregateRoot<AttendableEventId>
         slot.Take(participant.Id);
         var attendance = new Attendance(Guid.NewGuid(), Id, slot.Id, participant.Id, From, To);
         participant.Attend(attendance);
-        IncrementVersion();
 
         return attendance;
     }
