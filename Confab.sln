@@ -68,6 +68,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Confab.Modules.Attendances.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Confab.Modules.Attendances.Api", "src\Modules\Attendances\Confab.Modules.Attendances.Api\Confab.Modules.Attendances.Api.csproj", "{1675C668-4158-4E64-8109-4B728528D195}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Confab.Modules.Attendances.Tests.Unit", "tests\Modules\Attendances\Confab.Modules.Attendances.Tests.Unit\Confab.Modules.Attendances.Tests.Unit.csproj", "{B8B6EA4D-F7CD-4961-8DEE-7AAD4D59DCE3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -150,6 +152,10 @@ Global
 		{1675C668-4158-4E64-8109-4B728528D195}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1675C668-4158-4E64-8109-4B728528D195}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1675C668-4158-4E64-8109-4B728528D195}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B8B6EA4D-F7CD-4961-8DEE-7AAD4D59DCE3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B8B6EA4D-F7CD-4961-8DEE-7AAD4D59DCE3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B8B6EA4D-F7CD-4961-8DEE-7AAD4D59DCE3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B8B6EA4D-F7CD-4961-8DEE-7AAD4D59DCE3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -183,6 +189,7 @@ Global
 		{04FBCEED-FBB2-47B9-9748-9EF1A9489E95} = {30704735-5688-492D-9A65-93E552492E4E}
 		{F9EF303B-A3C7-4B7A-86B8-4AE1C4DB5013} = {30704735-5688-492D-9A65-93E552492E4E}
 		{1675C668-4158-4E64-8109-4B728528D195} = {30704735-5688-492D-9A65-93E552492E4E}
+		{B8B6EA4D-F7CD-4961-8DEE-7AAD4D59DCE3} = {30704735-5688-492D-9A65-93E552492E4E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B41B132C-C9A1-48E8-A572-9FEC246EEB68}
