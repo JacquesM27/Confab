@@ -48,3 +48,6 @@ app.MapControllers();
 app.MapModuleInfo();
 
 app.Run();
+
+// All integration test projects will have a reference to Confab.Shared.Tests, so I don't want to add InternalsVisibleTo
+public partial class Program { }

@@ -24,4 +24,8 @@
     <ProjectReference Include="..\..\Shared\Confab.Shared.Abstractions\Confab.Shared.Abstractions.csproj" />
   </ItemGroup>
 
+<!--  <ItemGroup>-->
+<!--    <InternalsVisibleTo Include="Confab.Shared.Tests"/>-->
+<!--  </ItemGroup>-->
+  
 </Project>
