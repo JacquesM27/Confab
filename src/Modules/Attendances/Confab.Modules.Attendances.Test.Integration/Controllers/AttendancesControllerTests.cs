@@ -14,6 +14,7 @@ using Shouldly;
 
 namespace Confab.Modules.Attendances.Test.Integration.Controllers;
 
+[Collection("integration")]
 public class AttendancesControllerTests : 
     IClassFixture<TestApplicationFactory>, 
     IClassFixture<TestAttendancesDbContext>
@@ -100,8 +101,33 @@ public class AttendancesControllerTests :
         attendances.ShouldNotBeEmpty();
         attendances.Length.ShouldBe(1);
     }
-    
-    
+
+    [Fact]
+    public async Task post_attend_should_succeed_free_slots_and_valid_participant()
+    {
+        // Arrange
+        var from = DateTime.UtcNow;
+        var to = from.AddDays(1);
+        var conferenceId = Guid.NewGuid();
+        var userId = Guid.NewGuid();
+        var participant = new Participant(Guid.NewGuid(), conferenceId, userId);
+        var slot = new Slot(Guid.NewGuid());
+        var attendableEvent = new AttendableEvent(Guid.NewGuid(), conferenceId, from, to, [slot]);
+
+        await _dbContext.AttendableEvents.AddAsync(attendableEvent);
+        await _dbContext.Participants.AddAsync(participant);
+        await _dbContext.Slots.AddAsync(slot);
+        await _dbContext.SaveChangesAsync();
+        
+        Authenticate(userId);
+        
+        // Act
+        var response = await _client.PostAsJsonAsync($"{Path}/events/{attendableEvent.Id}/attend", new {});
+
+        // Assert
+        response.IsSuccessStatusCode.ShouldBeTrue();
+        response.StatusCode.ShouldBe(HttpStatusCode.NoContent);
+    }
         
     private void Authenticate(Guid userId)
     {
