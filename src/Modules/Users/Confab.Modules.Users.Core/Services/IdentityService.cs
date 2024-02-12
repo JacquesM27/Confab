@@ -1,9 +1,11 @@
 ﻿using Confab.Modules.Users.Core.DTO;
 using Confab.Modules.Users.Core.Entities;
+using Confab.Modules.Users.Core.Events;
 using Confab.Modules.Users.Core.Exceptions;
 using Confab.Modules.Users.Core.Repositories;
 using Confab.Shared.Abstractions;
 using Confab.Shared.Abstractions.Auth;
+using Confab.Shared.Abstractions.Messaging;
 using Microsoft.AspNetCore.Identity;
 
 namespace Confab.Modules.Users.Core.Services;
@@ -12,7 +14,8 @@ internal class IdentityService(
     IUserRepository userRepository,
     IPasswordHasher<User> passwordHasher,
     IAuthManager authManager,
-    IClock clock)
+    IClock clock,
+    IMessageBroker messageBroker)
     : IIdentityService
 {
     
@@ -52,6 +55,7 @@ internal class IdentityService(
             Claims = dto.Claims
         };
         await userRepository.AddAsync(user);
+        await messageBroker.PublishAsync(new SignedUp(user.Id, user.Email));
     }
 
     public async Task<JsonWebToken> SignInAsync(SignInDto dto)
@@ -68,7 +72,8 @@ internal class IdentityService(
 
         var jwt = authManager.CreateToken(user.Id.ToString(), user.Role, claims: user.Claims);
         jwt.Email = user.Email;
-
+        messageBroker.PublishAsync(new SignedIn(user.Id));
+        
         return jwt;
     }
 }

@@ -74,6 +74,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Confab.Shared.Tests", "src\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Confab.Modules.Attendances.Test.Integration", "src\Modules\Attendances\Confab.Modules.Attendances.Test.Integration\Confab.Modules.Attendances.Test.Integration.csproj", "{14A852AC-27F9-413A-A24E-96D56B0D16A8}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Saga", "Saga", "{4C3A7DFD-95C7-4DAC-A464-CD7D6915BE06}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Confab.Module.Saga", "src\Modules\Saga\Confab.Module.Saga\Confab.Module.Saga.csproj", "{22C8A15B-15CF-4918-A5D5-8DC646088BD2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -168,6 +172,10 @@ Global
 		{14A852AC-27F9-413A-A24E-96D56B0D16A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{14A852AC-27F9-413A-A24E-96D56B0D16A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{14A852AC-27F9-413A-A24E-96D56B0D16A8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{22C8A15B-15CF-4918-A5D5-8DC646088BD2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{22C8A15B-15CF-4918-A5D5-8DC646088BD2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{22C8A15B-15CF-4918-A5D5-8DC646088BD2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{22C8A15B-15CF-4918-A5D5-8DC646088BD2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -204,6 +212,8 @@ Global
 		{B8B6EA4D-F7CD-4961-8DEE-7AAD4D59DCE3} = {30704735-5688-492D-9A65-93E552492E4E}
 		{E837B176-083A-4932-9BFF-818B8F2A2B9A} = {D2ACC8ED-E908-4292-9B7D-4F5EE6623332}
 		{14A852AC-27F9-413A-A24E-96D56B0D16A8} = {30704735-5688-492D-9A65-93E552492E4E}
+		{4C3A7DFD-95C7-4DAC-A464-CD7D6915BE06} = {2EBDDC48-BBF5-4438-B1EF-3A2DE6322F8E}
+		{22C8A15B-15CF-4918-A5D5-8DC646088BD2} = {4C3A7DFD-95C7-4DAC-A464-CD7D6915BE06}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B41B132C-C9A1-48E8-A572-9FEC246EEB68}

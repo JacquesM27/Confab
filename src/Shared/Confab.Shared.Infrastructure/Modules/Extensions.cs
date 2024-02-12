@@ -1,4 +1,5 @@
 ﻿using System.Reflection;
+using Confab.Shared.Abstractions.Commands;
 using Confab.Shared.Abstractions.Events;
 using Confab.Shared.Abstractions.Modules;
 using Microsoft.AspNetCore.Builder;
@@ -47,8 +48,6 @@ public static class Extensions
                 cfg.AddJsonFile(settings);
             }
 
-            return;
-
             IEnumerable<string> GetSettings(string pattern)
                 => Directory.EnumerateFiles(ctx.HostingEnvironment.ContentRootPath,
                     $"module.{pattern}.json", SearchOption.AllDirectories);
@@ -76,6 +75,10 @@ public static class Extensions
             .Where(x => x.IsClass && typeof(IEvent).IsAssignableFrom(x))
             .ToArray();
 
+        var commandTypes = types
+            .Where(t => t.IsClass && typeof(ICommand).IsAssignableFrom(t))
+            .ToArray();
+
         services.AddSingleton<IModuleRegistry>(sp =>
         {
             var eventDispatcher = sp.GetRequiredService<IEventDispatcher>();
@@ -87,6 +90,17 @@ public static class Extensions
                     (Task)eventDispatcherType.GetMethod(nameof(eventDispatcher.PublishAsync))?
                         .MakeGenericMethod(type)
                         .Invoke(eventDispatcher, [@event])!);
+            }
+
+            var commandDispatcher = sp.GetRequiredService<ICommandDispatcher>();
+            var commandDispatcherType = commandDispatcher.GetType();
+            
+            foreach (var type in commandTypes)
+            {
+                registry.AddBroadcastAction(type, @event =>
+                    (Task)commandDispatcherType.GetMethod(nameof(commandDispatcher.SendAsync))
+                        ?.MakeGenericMethod(type)
+                        .Invoke(commandDispatcher, [@event]));
             }
             
             return registry;
