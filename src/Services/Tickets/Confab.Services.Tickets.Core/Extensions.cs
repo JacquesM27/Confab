@@ -20,6 +20,9 @@ using Confab.Shared.Infrastructure.Queries;
 using Confab.Shared.Infrastructure.Services;
 using Confab.Shared.Infrastructure.Storage;
 using Confab.Shared.Infrastructure.Time;
+using Convey;
+using Convey.CQRS.Events;
+using Convey.MessageBrokers.RabbitMQ;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.ApplicationParts;
 using Microsoft.Extensions.DependencyInjection;
@@ -59,6 +62,12 @@ internal static class Extensions
         services.AddHostedService<AppInitializer>();
         services.AddControllers();
         
+        services
+            .AddConvey()
+            .AddRabbitMq()
+            .AddEventHandlers()
+            .AddInMemoryEventDispatcher()
+            .Build();
         
         services.AddPostgres<TicketsDbContext>();
         services.AddScoped<IConferenceRepository, ConferenceRepository>();

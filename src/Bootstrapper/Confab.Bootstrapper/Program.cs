@@ -1,6 +1,8 @@
 using Confab.Bootstrapper;
 using Confab.Shared.Infrastructure;
 using Confab.Shared.Infrastructure.Modules;
+using Convey;
+using Convey.MessageBrokers.RabbitMQ;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -46,6 +48,9 @@ modules.Clear();
 
 app.MapControllers();
 app.MapModuleInfo();
+
+app.UseConvey();
+app.UseRabbitMq();
 
 app.Run();
 
